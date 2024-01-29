@@ -5,7 +5,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework.routers import DefaultRouter
 
-from hospital.views import DoctorViewSet, PatientViewSet, AppointmentViewSet, LoginView
+from hospital.views import DoctorViewSet, OTPVerificationView, PatientViewSet, AppointmentViewSet, LoginView
 
 router = DefaultRouter()
 router.register(r'doctors', DoctorViewSet, basename='doctor')
@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/login/', LoginView.as_view(), name='login'),  # Register LoginView separately
+    path('api/verify/otp',OTPVerificationView.as_view(),name='verify_otp'),
     # Swagger documentation
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
